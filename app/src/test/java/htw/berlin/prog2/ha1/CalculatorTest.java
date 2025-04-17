@@ -105,5 +105,47 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should display huge numbers with Exponent")
+    void testHugeNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(4);
+        calc.pressDigitKey(8);
+        calc.pressDigitKey(9);
+        calc.pressEqualsKey();
+
+        String expected = "1.248898E10";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display 1 after multiplying a number with its inverse")
+    void testInvertAndBinOp() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressUnaryOperationKey("1/x");
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "1";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
